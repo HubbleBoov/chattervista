@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ChatterVista Chat App</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database-compat.js"></script>
+</head>
+<body>
+  <h1 class="logo">Chatter<span class="highlight">Vista</span></h1>
+
+  <div id="auth-section">
+    <h2>Login / Register</h2>
+    <input id="username" type="text" placeholder="Username (only for registration)" />
+    <input id="email" type="email" placeholder="Email" />
+    <input id="password" type="password" placeholder="Password" />
+    <button onclick="login()">Login</button>
+    <button onclick="register()">Register</button>
+  </div>
+
+  <div id="chat-section" style="display:none;">
+    <h2>Welcome, <span id="displayName"></span>!</h2>
+
+    <div class="tabs">
+      <button id="tab-public" class="active" onclick="showSection('public')">Public Lobby</button>
+      <button id="tab-dm" onclick="showSection('dm')">Direct Messages</button>
+      <button id="tab-groups" onclick="showSection('groups')">Groups</button>
+      <button id="logout-btn" onclick="logout()">Logout</button>
+    </div>
+
+    <!-- Public Chat -->
+    <div id="public-section" class="chat-section">
+      <div id="public-messages" class="messages"></div>
+      <input id="public-message-input" placeholder="Type a message" />
+      <button onclick="sendPublicMessage()">Send</button>
+    </div>
+
+    <!-- Direct Messages -->
+    <div id="dm-section" class="chat-section" style="display:none;">
+      <div>
+        <input id="dm-username" placeholder="Username to chat with" />
+        <button onclick="startDM()">Start Chat</button>
+      </div>
+      <div id="dm-chats"></div>
+    </div>
+
+    <!-- Groups -->
+    <div id="groups-section" class="chat-section" style="display:none;">
+      <div>
+        <input id="group-name" placeholder="Group name" />
+        <button onclick="createGroup()">Create Group</button>
+      </div>
+      <div id="group-list"></div>
+      <div id="group-chat-area" style="display:none;">
+        <h3 id="group-chat-name"></h3>
+        <div id="group-messages" class="messages"></div>
+        <input id="group-message-input" placeholder="Type a message" />
+        <button onclick="sendGroupMessage()">Send</button>
+        <button onclick="leaveGroup()">Leave Group</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
